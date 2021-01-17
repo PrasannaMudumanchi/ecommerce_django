@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="table-responsive text-nowrap">
+    <h2>Order Summary</h2>
+   <table class="table hover">
+   <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Item Price</th>
+        </tr>
+    </thead>  
+  <tbody>
+    {% for object_item in object.items.all %}
+        <tr>
+                <th scope="col">{{ forloop.counter }}</th>
+                <th scope="col">{{ object_item.item.title }}</th>
+                <th scope="col">{{ object_item.item.price }}</th>
+                <th scope="col">
+                    <a href="{% url 'ecommerce_site:remove_single_item_from_cart' object_item.item.slug %}"><i class="fas fa-minus"></i></a>
+                    {{ object_item.quantity }}
+                    <a href="{% url 'ecommerce_site:add_to_cart' object_item.item.slug %}"><i class="fas fa-plus"></i></a>
+                    
+
+                    
+
+                </th>
+                <th scope="col">
+                {% if object_item.item.discount_price %}
+                ${{object_item.get_total_discount_item_price}}
+                    <span class="btn-sm btn-light">
+                        Saved {{object_item.get_amount_saved}}  
+                    </span>
+                {% else %}
+                    {{object_item.get_total_item_price}}
+                {% endif %}
+                <a href="{% url 'ecommerce_site:remove_cart' object_item.item.slug %}"><i class="fas fa-trash text-danger float-right"></i></a>
+                </th>
+
+        </tr>   
+{% empty %}
+    <th>
+        <td colspan='5'>Your cart is empty</td>
+    </th>
+{% endfor %}
+    <tr>
+        <td colspan="4"><b>Order Total</b></td>
+        <td><b>{{ object.get_total}}</b>
+        </td>
+
+
+    </tr>
+    <tr>
+        <td colspan="5">
+            <a href="{% url 'ecommerce_site:checkout' %}" class="btn-sm btn-warning float-right ml-1">Proceed to checkout</a>
+            <a href="/" class="btn-sm btn-primary float-right">Continue shopping</a>  
+        </td>
+    </tr>
+  </tbody>
+    </table>
+</div>
+
+{% endblock %}

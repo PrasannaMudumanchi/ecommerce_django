@@ -6,7 +6,29 @@ from django.utils import timezone
 from django.contrib import messages
 
 # Create your views here.
+from django.views.generic import ListView, DetailView, View
+from django.utils import timezone
 
+
+def index(request):
+    context = {
+        "items": Item.objects.all()
+    }
+    return render(request, 'home/index.html', context)
+
+
+def checkout1(request):
+    return render(request, 'home/checkout.html')
+
+
+class Index(ListView):
+    model = Item
+    paginate_by = 12
+    template_name = 'home/index.html'
+
+
+def product(request):
+    return render(request, 'home/products.html')
 
 # def index(request):
 #     context = {

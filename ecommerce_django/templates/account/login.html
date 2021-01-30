@@ -1,6 +1,5 @@
-{% extends "account/base.html" %} {% load i18n %} {% load account socialaccount
-%} {% block head_title %}{% trans "Sign In" %} {% endblock %} {% block content
-%}
+{% extends "home/base.html"%} {% load i18n %} {% load account socialaccount %}
+{% block head_title %} {% trans "Sign In" %} {%endblock%} {% block content%}
 
 <main>
   <div class="container">
@@ -51,6 +50,7 @@
           <button class="primaryAction" type="submit">
             {% trans "Sign In" %}
           </button>
+          <h1>New Tag for testing</h1>
         </form>
       </div>
     </section>

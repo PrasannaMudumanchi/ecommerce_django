@@ -7,7 +7,7 @@ from .models import Item, Order, OrderItem
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib import messages
-
+from .forms import CheckoutForm
 # Create your views here.
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
@@ -20,8 +20,23 @@ def index(request):
     return render(request, 'home/index.html', context)
 
 
-def checkout1(request):
-    return render(request, 'home/checkout.html')
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        # form
+        form = CheckoutForm
+        context = {
+            'form': form
+        }
+        return render(self.request, 'home/checkout.html', context)
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            print("The form is valid")
+            return redirect('ecommerce_site:checkout')
+
+# def checkout1(request):
+#     return render(request, 'home/checkout.html')
 
 
 class OrderSummaryView(LoginRequiredMixin, View):

@@ -63,13 +63,14 @@
               <!--Grid column-->
               <div class="col-lg-4 col-md-6 mb-4">
                 <label for="zip">Zip</label>
-                <input
+                <!-- <input
                   type="text"
                   class="form-control"
                   id="zip"
                   placeholder=""
                   required
-                />
+                /> -->
+                {{form.zipCode}}
                 <div class="invalid-feedback">Zip code required.</div>
               </div>
               <!--Grid column-->
@@ -85,7 +86,7 @@
                 id="same-address"
               /> -->
               {{ form.same_billing_address }}
-              <label class="custom-control-label" for="same-address"
+              <label for="same_billing_address"
                 >Shipping address is the same as my billing address</label
               >
             </div>
@@ -96,9 +97,7 @@
                 id="save-info"
               /> -->
               {{ form.save_info }}
-              <label class="custom-control-label" for="save-info"
-                >Save this information for next time</label
-              >
+              <label for="save_info">Save this information for next time</label>
             </div>
 
             <hr />
